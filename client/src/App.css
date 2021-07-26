@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0; }
+
+.container {
+  padding-top: 7vh;
+  display: grid;
+  grid-template-columns: 75vw 25vw; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-auto-rows: 10vw;
+  column-gap: 3.0vw;
+  row-gap: 2.5vw; }
+
+.navbar {
+  position: fixed;
+  background-color: #222;
+  height: 7vh;
+  width: 100vw;
+  color: #eee;
+  font-family: 'Dancing Script',cursive;
+  font-size: 2.5rem;
+  text-align: center;
+  word-spacing: 0.7rem;
+  padding: 0.5rem; }
+
+.dashboard {
+  background-image: linear-gradient(to right, #c024249d, #f0cb35a4), url("./public/img/hero.jpg");
+  padding: 7.5vh 10%;
+  height: 93vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-blend-mode: exclusion; }
+
+.cart {
+  background: #f8f8f8;
+  height: 93vh;
+  padding: 5vh 10%;
+  box-shadow: -15px 10px 20px 3px rgba(20, 7, 7, 0.514);
+  position: relative; }
+  .cart h2 {
+    font-family: 'Dancing Script';
+    font-size: 2.2rem;
+    text-align: center;
+    background-image: linear-gradient(to bottom right, #f0cb35a4, #a73030);
+    color: #253b81;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem; }
+
+.itempage {
+  height: 100%;
+  width: 100%;
+  background-color: #eee;
+  border-radius: 10px;
+  box-shadow: 1px 1px 25px 3px black; }
+
+.card {
+  border-radius: 7px;
+  background-image: url("./public/img/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 13px 2px #202020;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 1rem;
+  font-family: 'Dancing Script';
+  font-size: 1.5rem; }
+
+.banner {
+  height: 40%;
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+  background-color: transparent;
+  background-image: url("./public/img/hero.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end; }
+  .banner-text {
+    color: white;
+    font-family: 'Dancing Script',cursive;
+    font-weight: 700;
+    font-size: 3rem;
+    padding: 1rem;
+    background-color: #b67600; }

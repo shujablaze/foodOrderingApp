@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+.container{
+    padding-top: 7vh;
+    display: grid;
+    grid-template-columns: 75vw 25vw;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-auto-rows: 10vw;
+    column-gap: 3.0vw;
+    row-gap: 2.5vw;
+}
+
+.navbar{
+    position: fixed;
+    background-color: #222;
+    height:7vh;
+    width:100vw;
+    color:#eee;
+    font-family: 'Dancing Script',cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    word-spacing: 0.7rem;
+    padding:0.5rem
+}
+//#c024249d,#f0cb35a4)
+
+.dashboard{
+    //background-color: rgba(53, 53, 134, 0.712);
+    background-image: linear-gradient(to right,#c024249d,#f0cb35a4),url('./public/img/hero.jpg');
+    padding:7.5vh 10%;
+    height:93vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-blend-mode:exclusion;
+}
+
+
+.cart{
+    //background-image: linear-gradient(to bottom right,#f0cb35a4,#eee);
+    background:rgb(248, 248, 248);
+    height:93vh;
+    padding:5vh 10%;
+    box-shadow: -15px 10px 20px 3px rgba(20, 7, 7, 0.514);
+    position: relative;
+    h2{
+        font-family: 'Dancing Script';
+        font-size: 2.2rem;
+        text-align: center;
+        background-image: linear-gradient(to bottom right,#f0cb35a4,rgb(167, 48, 48));
+        color:rgb(37, 59, 129);
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        padding:1rem;
+    }
+}
+
+.itempage{
+    height:100%;
+    width: 100%;
+    background-color:#eee;
+    border-radius: 10px;
+    box-shadow: 1px 1px 25px 3px black;
+}
+
+
+
+
