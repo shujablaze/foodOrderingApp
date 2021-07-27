@@ -40,7 +40,7 @@
 .cart {
   background: #f8f8f8;
   height: 93vh;
-  padding: 5vh 10%;
+  padding: 11vh 5%;
   box-shadow: -15px 10px 20px 3px rgba(20, 7, 7, 0.514);
   position: relative; }
   .cart h2 {
@@ -95,3 +95,8 @@
     font-size: 3rem;
     padding: 1rem;
     background-color: #b67600; }
+.cart-item{
+    display: flex;
+    justify-content: space-between;
+    padding:0.5rem;
+}

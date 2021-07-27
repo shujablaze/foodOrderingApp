@@ -8,7 +8,7 @@ function CategoryMenu() {
             <Link to="/pizza/new" className="card">
                 <div>Nice Pizza</div>
             </Link>
-            <Link className="card">
+            <Link to="/pizza/big" className="card">
                 <div>Cheezy</div>
             </Link>
             <Link className="card">
