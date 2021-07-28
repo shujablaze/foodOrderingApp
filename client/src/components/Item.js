@@ -15,13 +15,13 @@ function Item() {
                 <div className="banner-text">Nice Pizza</div>
             </div>
             <div className="item__description">
-                lorem ipsum dolor sit amet lorem dolor ipsum amet dolor amet
+            Spicy jalapeno bacon ipsum dolor amet chislic meatball boudin, buffalo drumstick strip steak esse ea capicola ribeye corned beef et. In salami velit pig strip steak officia. Id tri-tip velit meatball. Chislic pork landjaeger leberkas.
             </div>
             <div className="item__addons">
 
             </div>
             <div className="item__btn">
-                <button onClick={handleClick}>Order</button>
+                <button className="btn btn-primary " onClick={handleClick}>Add to Cart</button>
             </div>
         </div>
     )

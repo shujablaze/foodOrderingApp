@@ -36,7 +36,7 @@ function App() {
   return (
     <div >
       <Nav/>
-      <section className="container">
+      <section className="container-app">
       <cartContext.Provider value={{cart,setCart}}>
         <Dashboard/>
         <Cart/>

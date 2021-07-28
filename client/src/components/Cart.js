@@ -10,9 +10,9 @@ function CartItem(props) {
     return(
         <div className="cart-item">
             <div>{props.name}</div>
-            <div><input type="number" value={props.quantity} onChange={handleChange} min="1" max="9"/></div>
+            <div className><input type="number" value={props.quantity} onChange={handleChange} min="1" max="9"/></div>
             <div>Rs.{props.price}</div>
-            <button onClick={()=>setCart({type:"delete",data:{id:1}})}>Remove</button>
+            <button className="btn btn-danger" onClick={()=>setCart({type:"delete",data:{id:1}})}>Remove</button>
         </div>
     )
 }
@@ -25,7 +25,7 @@ function Cart() {
     return (
         <div className="cart">
             <h2>Order Summary</h2>
-            {cart.map((el)=><CartItem key={Math.random()} name={el.name} quantity={el.quantity} price={el.price}></CartItem>)}
+            {cart.map((el)=><CartItem key={Math.random()} name={el.name} quantity={el.quantity} price={el.price*el.quantity}></CartItem>)}
         </div>
     )
 }
