@@ -1,6 +1,6 @@
 const express = require('express')
-const {newCategory} = require('./controllers/categoryController')
-const {newItem} = require('./controllers/itemController')
+const { newCategory,deleteCategory,updateCategory } = require('./controllers/categoryController')
+const { newItem,deleteItem,updateItem } = require('./controllers/itemController')
 
 const app = express()
 
@@ -11,14 +11,14 @@ app.use(express.urlencoded({extended:true}))
 //ROUTES TO HANDLE CATEGORY MANIPULATIONS
 app.route('/admin/category')
     .post(newCategory)
-    //.delete(deleteCategory)
-    //.patch(updateCategory)
+    .delete(deleteCategory)
+    .patch(updateCategory)
 
 //ROUTES TO HANDLE ITEM MANIPULATIONS
 app.route('/admin/items')
     .post(newItem)
-    //.delete(deleteItem)
-    //.patch(updateItem)
+    .delete(deleteItem)
+    .patch(updateItem)
 
 //GLOBAL ERROR HANDLER
 app.use((err,req,res,next)=>{
