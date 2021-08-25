@@ -3,26 +3,34 @@ const Category = require('../Models/Category')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/tmp/my-uploads')
+      cb(null, '../client/public/img')
     },
     filename: function (req, file, cb) {
+      const extension = file.originalname.split('.').pop()
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      cb(null, file.fieldname + '-' + uniqueSuffix)
+      cb(null, file.fieldname + '-' + uniqueSuffix + '.' + extension)
     }
 })
   
-const upload = multer({ storage: storage })
+exports.upload = multer({ storage: storage })
 
 exports.newCategory = async (req,res,next) => {
     try{
-        const newCategory = await Category.create(req.body)
-        
+
+        let filename
+
+        (req.file) ? filename = req.file.filename : 'bg-pic--default.jpg'
+
+        const newCategory = new Category({name:req.body.name,bgPic:filename})
+        await newCategory.save()
+
         res.status(201).json({
-            status : 'Success',
-            data : newCategory
+        status : 'Success',
+        data : newCategory
         })
 
     }catch(err){
+        console.log(err)
         next(err)
     }
 }
