@@ -16,7 +16,7 @@ app.route('/admin/category')
 
 //ROUTES TO HANDLE ITEM MANIPULATIONS
 app.route('/admin/items')
-    .post(newItem)
+    .post(upload.single('bgPic'),newItem)
     .delete(deleteItem)
     .patch(updateItem)
 

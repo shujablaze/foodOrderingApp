@@ -9,14 +9,27 @@ const storage = multer.diskStorage({
       const extension = file.originalname.split('.').pop()
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
       cb(null, file.fieldname + '-' + uniqueSuffix + '.' + extension)
-    }
+    },
 })
+
+const filterFiles = (req,file,cb)=>{
+    const allowed = ['jpg','jpeg','png']
+    const extension = file.originalname.split('.').pop()
+    const mimetype = file.mimetype.split('/')[1]
+
+    if(allowed.indexOf(extension)!==-1 && allowed.indexOf(mimetype)!==-1){
+        return cb(null,true)
+    }
+    else{
+        return cb('Only Images are allowed',false)
+    }
+}
   
-exports.upload = multer({ storage: storage })
+exports.upload = multer({ 
+    storage: storage,limit:{fileSize:100000 },fileFilter:filterFiles})
 
 exports.newCategory = async (req,res,next) => {
     try{
-
         let filename
 
         (req.file) ? filename = req.file.filename : 'bg-pic--default.jpg'
@@ -30,7 +43,6 @@ exports.newCategory = async (req,res,next) => {
         })
 
     }catch(err){
-        console.log(err)
         next(err)
     }
 }

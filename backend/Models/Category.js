@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const fs = require('fs/promises')
 const Item = require('./Item')
 
 const categorySchema = new mongoose.Schema({
@@ -13,9 +14,13 @@ const categorySchema = new mongoose.Schema({
 })
 
 categorySchema.pre('findOneAndDelete',async function(){
-    const {_id} = await this.findOne()
+    const {_id,bgPic} = await this.findOne()
 
     await Item.deleteMany({category:_id})
+
+    if(!bgPic.endsWith('bg-pic--default.jpg')){
+        await fs.rm(`../client/public/img/${bgPic}`)
+    }
 })
 
 const Category = mongoose.model('Category',categorySchema)

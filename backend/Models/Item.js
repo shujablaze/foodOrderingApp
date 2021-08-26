@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const fs = require('fs/promises')
 
 const itemSchema = new mongoose.Schema({
     name:{
@@ -11,7 +12,8 @@ const itemSchema = new mongoose.Schema({
     },
     category:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'Category'
+        ref:'Category',
+        required:[true,"An item must have a category"]
     },
     price:{
         type:Number,
@@ -20,6 +22,20 @@ const itemSchema = new mongoose.Schema({
     description:{
         type:String,
         default:"Try this offering and we promise you will ask for refill."
+    }
+})
+
+itemSchema.pre('findOneAndDelete',async function(){
+    const {bgPic} = await this.findOne()
+    
+    await fs.rm(`../client/public/img/${bgPic}`)
+})
+
+itemSchema.pre('deleteMany',async function(){
+    const items = await this.find()
+    
+    for(item of items){
+        await fs.rm(`../client/public/img/${item.bgPic}`)
     }
 })
 
