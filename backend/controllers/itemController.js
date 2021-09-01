@@ -1,11 +1,10 @@
-const multer = require('multer')
-const { findOneAndUpdate, findByIdAndDelete } = require('../Models/Item')
+const fs = require('fs/promises')
 const Item = require('../Models/Item')
 
 
 exports.newItem = async (req,res,next) => {
     try{
-        let bgPic
+        var bgPic
 
         (req.file) ? bgPic = req.file.filename : 'itembg--default'
         const{name,category,price,description} = req.body
@@ -15,6 +14,24 @@ exports.newItem = async (req,res,next) => {
         res.status(201).json({
             status:'Success',
             data:newItem
+        })
+
+    }catch(err){
+        await fs.rm(`../client/public/img/${bgPic}`)
+        next(err)
+    }
+}
+
+exports.getItem = async (req,res,next) => {
+    try{
+        const { item } = req.params
+        const data = await Item.findOne({'name':item})
+
+        if(!data) throw new Error('Invalid Item')
+
+        res.status(200).json({
+            status:'Success',
+            data
         })
 
     }catch(err){

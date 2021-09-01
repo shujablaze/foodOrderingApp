@@ -1,5 +1,7 @@
-const multer = require('multer');
+const multer = require('multer')
+const fs = require('fs/promises')
 const Category = require('../Models/Category')
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -30,7 +32,7 @@ exports.upload = multer({
 
 exports.newCategory = async (req,res,next) => {
     try{
-        let filename
+        var filename
 
         (req.file) ? filename = req.file.filename : 'bg-pic--default.jpg'
 
@@ -40,6 +42,36 @@ exports.newCategory = async (req,res,next) => {
         res.status(201).json({
         status : 'Success',
         data : newCategory
+        })
+
+    }catch(err){
+        await fs.rm(`../client/public/img/${filename}`)
+        next(err)
+    }
+}
+
+exports.getAllCategories = async (req,res,next)=>{
+    try{
+        const categories = await Category.find()
+        res.status(200).json({
+            status:'Success',
+            data:categories
+        })
+    }catch(err){
+        next(err)
+    }
+}
+
+exports.getCategory = async (req,res,next) => {
+    try{
+        const { category }= req.params
+        const data = await Category.findOne({'name':`${category}`}).populate( {path:'items', select:'name price bgPic '} )
+
+        if(!data) throw new Error('Invalid Category')
+
+        res.status(200).json({
+            status:'Success',
+            data
         })
 
     }catch(err){

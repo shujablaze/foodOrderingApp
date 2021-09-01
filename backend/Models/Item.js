@@ -23,7 +23,7 @@ const itemSchema = new mongoose.Schema({
         type:String,
         default:"Try this offering and we promise you will ask for refill."
     }
-})
+},{toJSON:{versionKey:false}})
 
 itemSchema.pre('findOneAndDelete',async function(){
     const {bgPic} = await this.findOne()

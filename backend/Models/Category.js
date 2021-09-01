@@ -11,6 +11,12 @@ const categorySchema = new mongoose.Schema({
         type:String,
         default:"bg-pic--default.jpg"
     }
+},{toJSON:{virtuals:true,versionKey:false},toObject:{virtuals:true},id:false})
+
+categorySchema.virtual('items',{
+    ref:'Item',
+    foreignField:'category',
+    localField:'_id'
 })
 
 categorySchema.pre('findOneAndDelete',async function(){
