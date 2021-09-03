@@ -11,7 +11,7 @@ function Dashboard() {
             <Route path="/" exact>
                 <Categories/>
             </Route>
-            <Route path="/:cateogry" exact>
+            <Route path="/:category" exact>
                 <CategoryMenu/>
             </Route>
             <Route path="/:category/:item">

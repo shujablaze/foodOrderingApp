@@ -8,6 +8,6 @@ useFindAndModify:false,
 useUnifiedTopology:true})
 .then(con=>{console.log("DB connected")});
 
-app.listen(3000,'localhost',()=>{
+app.listen(4000,'localhost',()=>{
     console.log("server started at ",new Date().toTimeString())
 })

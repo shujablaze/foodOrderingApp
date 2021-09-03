@@ -20,7 +20,6 @@ function App() {
           if(item._id === action.data.id) item.quantity = action.data.quantity
           return item
         })
-        console.log(newState)
         return newState
       
       case "delete":

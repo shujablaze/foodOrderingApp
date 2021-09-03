@@ -1,8 +1,12 @@
 const express = require('express')
+const cors = require('cors')
 const { newCategory,getAllCategories,getCategory,deleteCategory,updateCategory,upload } = require('./controllers/categoryController')
 const { newItem,getItem,deleteItem,updateItem } = require('./controllers/itemController')
 
 const app = express()
+
+// CORS
+app.use(cors())
 
 // TO PARSE REQ BODY
 app.use(express.json())
