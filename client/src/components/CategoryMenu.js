@@ -6,7 +6,7 @@ import {Link,useParams} from 'react-router-dom'
 const ItemCard = ({data,category}) => {
     const style = {backgroundImage: `url("${process.env.PUBLIC_URL +"/img/"+ data.bgPic}")`}
     return (
-        <Link to={"/"+category+"/"+data.name} className="card" style={style}>
+        <Link to={"/restraunt/"+category+"/"+data.name} className="card" style={style}>
                 <div>{data.name}</div>
         </Link>
     )

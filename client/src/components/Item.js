@@ -4,7 +4,7 @@ import {cartContext} from '../App'
 import {useParams} from 'react-router-dom'
 
 function Item() {
-    const {setCart} =  useContext(cartContext)
+    const {cart,setCart} =  useContext(cartContext)
     const [foodItem,setItem] = useState({})
     const {category,item} = useParams()
 
@@ -12,10 +12,25 @@ function Item() {
         axios.get(`http://localhost:4000/${category}/${item}`).then(res=>{
             setItem(res.data.data)
         })
-    },[foodItem])
+    },[foodItem,category,item])
 
     const handleClick = ()=>{
-        setCart({type:"add",data:{_id:foodItem._id,name:foodItem.name,quantity:1,price:foodItem.price}})
+        let presentInCart = false
+        let quantity = 1 
+        
+        for (let it of cart){
+            if(it._id === foodItem._id){
+                presentInCart = true
+                quantity = it.quantity + 1
+                break
+            }
+        } 
+
+        if(!presentInCart){
+            setCart({type:"add",data:{_id:foodItem._id,name:foodItem.name,quantity,price:foodItem.price}})
+        }else{
+            setCart({type:"changeQuantity",data:{quantity,id:foodItem._id}})
+        }
     }
 
     return (

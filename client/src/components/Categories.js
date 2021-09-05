@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const CategoryCard = ({data}) => {
     const style = {backgroundImage: `url("${process.env.PUBLIC_URL +"/img/"+ data.bgPic}")`}
     return (
-        <Link to={"/"+ data.name} className="card" style={style}>
+        <Link to={"/restraunt/"+ data.name} className="card" style={style}>
                 <div>{data.name}</div>
         </Link>
     )
