@@ -4,7 +4,8 @@
   padding: 0; }
 
 html {
-  font-size: 100%; }
+  font-size: 100%;
+  font-family: 'Lato','san-serif'; }
   @media only screen and (max-width: 1400px) {
     html {
       font-size: 80%; } }
@@ -142,3 +143,34 @@ html {
   letter-spacing: 1px;
   word-spacing: 3px;
   line-height: 1.5; }
+
+.tabbed-component {
+  width: 100%;
+  margin: 2rem auto; }
+  .tabbed-component__nav {
+    display: flex; }
+  .tabbed-component__label {
+    color: #eee;
+    text-transform: capitalize;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    padding: 0.5rem 2rem;
+    margin-right: 1.5rem; }
+    .tabbed-component__label--1 {
+      background-color: #165514;
+      border: 1px solid #84fa80; }
+    .tabbed-component__label--2 {
+      background-color: #1d27af;
+      border: 1px solid #7c9ffd; }
+    .tabbed-component__label--3 {
+      background-color: #8b2424;
+      border: 1px solid #f76666; }
+    .tabbed-component__label--inactive {
+      background-color: rgba(126, 126, 126, 0.699);
+      color: #161616; }
+  .tabbed-component__body {
+    padding: 3.5rem;
+    background-color: white; }

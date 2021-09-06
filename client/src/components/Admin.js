@@ -14,12 +14,14 @@ const AdminCard = ({title,link,pic}) => {
 
 const Admin = () => {
     return (
-        <div className="grid">
+        
         <Router>
-            <Route path="/admin" exact>
-                <AdminCard title="Edit Categories" link="category" pic="cat-default"/>
-                <AdminCard title="Edit Items" link="items" pic="item-default"/>
-            </Route>
+            <div className="grid">
+                <Route path="/admin" exact>
+                    <AdminCard title="Edit Categories" link="category" pic="cat-default"/>
+                    <AdminCard title="Edit Items" link="items" pic="item-default"/>
+                </Route>
+            </div>
             <Route path="/admin/category" exact>
                 <AdminCategory/>
             </Route>
@@ -28,7 +30,7 @@ const Admin = () => {
             </Route>
         </Router>
 
-        </div>
+        
     )
 }
 
