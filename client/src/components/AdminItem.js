@@ -1,10 +1,16 @@
 import React from 'react'
+import ItemCreateForm from './ItemCreateForm'
+import TabbedComponent from './TabbedComponent'
 
 const AdminItem = () => {
     return (
-        <div>
-            Admin Items
-        </div>
+        <TabbedComponent
+            label1 = "Add Items"
+            label2 = "Edit Items"
+            label3 = "Delete Items"
+            state1 = {<ItemCreateForm/>}
+
+        />
     )
 }
 

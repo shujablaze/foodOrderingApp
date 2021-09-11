@@ -7,7 +7,7 @@ const ItemCard = ({data,category}) => {
     const style = {backgroundImage: `url("${process.env.PUBLIC_URL +"/img/"+ data.bgPic}")`}
     return (
         <Link to={"/restraunt/"+category+"/"+data.name} className="card" style={style}>
-                <div>{data.name}</div>
+                <div className="card__text">{data.name}</div>
         </Link>
     )
 }
