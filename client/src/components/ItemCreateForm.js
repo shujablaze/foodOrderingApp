@@ -13,7 +13,7 @@ const ItemCardPreview = ({ src,name,price })=>{
 const ItemCreateForm = () => {
 
     // Category List to append item to
-    const [categoryList,setCategoryList] = useState()
+    const [categoryList,setCategoryList] = useState([])
     const [selectedCategory,setSelectedCategory] = useState('')
 
     // Controlled Form Inputs State
@@ -28,16 +28,17 @@ const ItemCreateForm = () => {
     useEffect(()=>{
         axios.get('http://localhost:4000').then((res)=>{
             setCategoryList(res.data.data)
+            setCategory(res.data.data[0]._id)
         })
     },[])
 
     useEffect(()=>{
-        for(let cat in categoryList){
+        for(let cat of categoryList){
             if(cat.name === selectedCategory){
                 setCategory(cat._id)
             }
         }
-    },[selectedCategory])
+    },[selectedCategory,setCategory,categoryList])
 
 
     const handleChange = (e)=>{
@@ -68,7 +69,14 @@ const ItemCreateForm = () => {
             url:'http://localhost:4000/admin/items',
             headers:{'content-type':'multipart/form-data'},
             data
-        }).then((res)=>alert(res.data.status))
+        })
+        .then((res)=>{
+            setBgPic(null)
+            setName('')
+            setSrc('')
+            setPrice('')
+            alert(res.data.status)})
+        .catch((err)=>alert(err.response.data.message))
     }
 
     return (
@@ -96,7 +104,7 @@ const ItemCreateForm = () => {
                     <input type="number" id="price" className="formfield__select" placeholder="Enter Price" value={price} required onChange={(e)=>{setPrice(e.target.value)}}/>
                 </div>
 
-                <div className="formfile--row">
+                <div className="formfield--row">
                     <input className="btn btn-secondary" type="submit" value="submit"/>
                 </div>
                 

@@ -12,8 +12,10 @@ const DeleteForm = () => {
     const getCategoryList = () => {
         axios.get('http://localhost:4000').then((res)=>{
             setCategoryList(res.data.data)
-            setSelectedCategory(res.data.data[0])
-            setCategoryId(res.data.data[0]._id)
+            if(res.data.data.length>0){
+                setSelectedCategory(res.data.data[0])
+                setCategoryId(res.data.data[0]._id)
+            }
         })
     }
 
@@ -28,7 +30,7 @@ const DeleteForm = () => {
                 setCategoryId(cat._id)
             }
         }
-    },[selectedCategory])
+    },[selectedCategory,categoryList])
 
     const handleSubmit = (e)=>{
         e.preventDefault()

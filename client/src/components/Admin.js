@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+import { Route,Link } from 'react-router-dom'
 import AdminCategory from './AdminCategory'
 import AdminItem from './AdminItem'
 
@@ -15,7 +15,7 @@ const AdminCard = ({title,link,pic}) => {
 const Admin = () => {
     return (
         
-        <Router>
+        <>
             <div className="grid">
                 <Route path="/admin" exact>
                     <AdminCard title="Edit Categories" link="category" pic="cat-default"/>
@@ -25,11 +25,10 @@ const Admin = () => {
             <Route path="/admin/category" exact>
                 <AdminCategory/>
             </Route>
-            <Route path="/admin/items" exact>
+            <Route path="/admin/items" exact >
                 <AdminItem/>
             </Route>
-        </Router>
-
+        </>
         
     )
 }

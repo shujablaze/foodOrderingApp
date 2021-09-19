@@ -44,9 +44,11 @@ const CategoryCreateForm = () => {
             url:'http://localhost:4000/admin/category',
             headers:{'content-type':'multipart/form-data'},
             data
-        }).then((res)=>alert(res.data.status))
+        })
+        .then((res)=>alert(res.data.status))
+        .catch((err)=>alert(err.response.data.message))
 
-        setBgPic('')
+        setBgPic(null)
         setSrc('')
         setName('')
     }
@@ -56,7 +58,7 @@ const CategoryCreateForm = () => {
             <form className="primary-form" onSubmit={handleSubmit}>
                 <div className="formfield">
                     <label htmlFor="category" className="formfield__label">Name</label>
-                    <input type="text" id="category" className="formfield__text" placeholder="Enter name of category" value={name} required onChange={(e)=>{setName(e.target.value)}}/>
+                    <input type="text" id="category" className="formfield__text" placeholder="Enter name of category" required value={name}  onChange={(e)=>{setName(e.target.value)}}/>
                 </div>
                 
                 <div className="formfield">

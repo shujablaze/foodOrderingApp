@@ -15,9 +15,11 @@ const CategoryEditForm = () => {
     useEffect(()=>{
         axios.get('http://localhost:4000').then(res=>{
             setCategoryList(res.data.data)
-            setSelectedCategory(res.data.data[0])
-            setName(res.data.data[0].name)
-            setSrc(res.data.data[0].bgPic)
+            if(res.data.data.length > 0){
+                setSelectedCategory(res.data.data[0])
+                setName(res.data.data[0].name)
+                setSrc(res.data.data[0].bgPic)
+            }
         })
     },[])
 
@@ -28,7 +30,7 @@ const CategoryEditForm = () => {
                 setSrc(category.bgPic)
             }
         }
-    },[selectedCategory])
+    },[selectedCategory, setName,categoryList,setSrc])
 
 
     const handleChange = (e)=>{
@@ -84,9 +86,10 @@ const CategoryEditForm = () => {
                 <div className="formfield">
                     <label htmlFor="bg-img" className="formfield__label">background image</label>
                     <input id="bg-img" className="formfield__file" type="file" accept="image/*" onChange={handleChange}/>
+                    
                 </div>
 
-                <div className="formfile--row">
+                <div className="formfield--row">
                     <input className="btn btn-secondary" type="submit" value="submit"/>
                 </div>
                 
