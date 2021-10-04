@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const { newCategory,getAllCategories,getCategory,deleteCategory,updateCategory,upload } = require('./controllers/categoryController')
 const { newItem,getItem,deleteItem,updateItem } = require('./controllers/itemController')
+const { placeOrder,getAllOrders } = require('./controllers/orderController')
 
 const app = express()
 
@@ -12,10 +13,10 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-// GET ROUTES FOR USER INTERACTION
-app.get('/',getAllCategories)
-app.get('/:category',getCategory)
-app.get('/:category/:item',getItem)
+// ROUTES TO HANDLE ORDERING
+app.route('/order')
+    .get(getAllOrders)
+    .post(placeOrder)
 
 // ROUTES TO HANDLE CATEGORY MANIPULATIONS
 app.route('/admin/category')
@@ -28,6 +29,11 @@ app.route('/admin/items')
     .post(upload.single('bgPic'),newItem)
     .delete(deleteItem)
     .patch(updateItem)
+
+// GET ROUTES FOR USER INTERACTION
+app.get('/',getAllCategories)
+app.get('/:category',getCategory)
+app.get('/:category/:item',getItem)
 
 // GLOBAL ERROR HANDLER
 app.use((err,req,res,next)=>{

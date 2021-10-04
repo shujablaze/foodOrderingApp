@@ -11,14 +11,13 @@ const CategoryEditForm = () => {
     // States to help selecting category to edit
     const [categoryList,setCategoryList] = useState([])
     const [selectedCategory,setSelectedCategory] = useState({})
+    const [categoryId,setCategoryId] = useState(0)
 
     useEffect(()=>{
         axios.get('http://localhost:4000').then(res=>{
             setCategoryList(res.data.data)
             if(res.data.data.length > 0){
-                setSelectedCategory(res.data.data[0])
-                setName(res.data.data[0].name)
-                setSrc(res.data.data[0].bgPic)
+                setSelectedCategory(res.data.data[0].name)
             }
         })
     },[])
@@ -28,41 +27,25 @@ const CategoryEditForm = () => {
             if(category.name === selectedCategory){
                 setName(category.name)
                 setSrc(category.bgPic)
+                setCategoryId(category._id)
             }
         }
-    },[selectedCategory, setName,categoryList,setSrc])
+    },[selectedCategory, setName, setSrc])
 
-
-    const handleChange = (e)=>{
-        setBgPic(e.target.files[0])
-
-        // Setting Src for Image Preview
-        if(e.target.files[0]){
-            const fileReader = new FileReader()
-            fileReader.readAsDataURL(e.target.files[0])
-            fileReader.onloadend = ()=>setSrc(fileReader.result)
-        }else{
-            setSrc('')
-        }
-        
-    }
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-
-        const data = new FormData()
-
-        data.append('name',name)
-        data.append('bgPic',bgPic)
+        const data = {name:name}
 
         axios({
             method:'patch',
             url:'http://localhost:4000/admin/category',
-            headers:{'content-type':'multipart/form-data'},
-            data
+            data:{
+                id:categoryId,
+                data:data
+            }
         }).then((res)=>alert(res.data.status))
 
-        setBgPic('')
         setSrc('')
         setName('')
     }
@@ -83,18 +66,11 @@ const CategoryEditForm = () => {
                     <input type="text" id="category" className="formfield__text" placeholder="Enter name of category" value={name} required onChange={(e)=>{setName(e.target.value)}}/>
                 </div>
                 
-                <div className="formfield">
-                    <label htmlFor="bg-img" className="formfield__label">background image</label>
-                    <input id="bg-img" className="formfield__file" type="file" accept="image/*" onChange={handleChange}/>
-                    
-                </div>
-
                 <div className="formfield--row">
                     <input className="btn btn-secondary" type="submit" value="submit"/>
                 </div>
                 
             </form>
-            {(src!=='') ? <img src={`${process.env.PUBLIC_URL}/img/${src}`} alt="background"/> : ""}
             
         </>
     )

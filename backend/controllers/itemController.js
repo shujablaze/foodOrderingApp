@@ -42,6 +42,7 @@ exports.getItem = async (req,res,next) => {
 exports.updateItem = async (req,res,next) => {
     try{
         const { id,data } = req.body
+        console.log('here')
 
         const updatedItem = await Item.findByIdAndUpdate(id,data,{
             new:true,

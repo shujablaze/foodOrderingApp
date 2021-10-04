@@ -8,12 +8,11 @@ const ItemEditForm = () => {
     const [category,setCategory] = useState('')
 
     const [item,setItem] = useState('')
-    const [src,setSrc] = useState('')
+    const [itemId,setItemId] = useState('')
 
     const [name,setName] = useState('')
     const [price,setPrice] = useState(0)
     const [description,setDescription] = useState('')
-    const [bgPic,setBgPic] = useState(null)
 
 
     useEffect(() => {
@@ -45,31 +44,37 @@ const ItemEditForm = () => {
                     setName(it.name)
                     setPrice(it.price)
                     setDescription(it.description)
+                    setItemId(it._id)
                 }
             }
         }else{
             setName('')
             setPrice('')
             setDescription('')
+            setItemId('')
         }
     },[item,itemList])
 
-    const handleChange = (e)=>{
-        setBgPic(e.target.files[0])
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-        // Setting Src for Image Preview
-        if(e.target.files[0]){
-            const fileReader = new FileReader()
-            fileReader.readAsDataURL(e.target.files[0])
-            fileReader.onloadend = ()=>setSrc(fileReader.result)
-        }else{
-            setSrc('')
-        }
-    }
+        const data = {name,price}
+
+        axios({
+            method:'PATCH',
+            url:'http://localhost:4000/admin/items',
+            data:{
+                id:itemId,
+                data
+            }
+        }).then((res)=>{alert(res.data.status)})
+        
+    } 
+
 
     return (
         <>
-        <form className = "primary-form">
+        <form className = "primary-form" onSubmit={handleSubmit}>
             <div className = "formfield">
                 <label className = "formfield__label" htmlFor = "item-category">Category</label>
                 <select className = "formfield__select" id = "item-category" value = {category} onChange = {(e)=>{setCategory(e.target.value)}}>
@@ -92,11 +97,6 @@ const ItemEditForm = () => {
             <div className = "formfield">
                 <label className = "formfield__label" htmlFor = "item-price">price</label>
                 <input className = "formfield__select" type = "number" value={price} onChange = {(e)=>{setPrice(e.target.value)}}/>
-            </div>
-
-            <div className = "formfield">
-                <label className = "formfield__label" htmlFor = "item-price">Background Image</label>
-                <input className = "formfield__file" type = "file"  onChange = {handleChange}/>
             </div>
 
             <div className = "formfield--row">
